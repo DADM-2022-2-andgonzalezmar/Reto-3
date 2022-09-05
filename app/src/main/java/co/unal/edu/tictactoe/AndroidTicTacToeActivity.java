@@ -69,38 +69,26 @@ public class AndroidTicTacToeActivity {
         // First see if there's a move O can make to win
         for (int i = 0; i < BOARD_SIZE; i++) {
             if (mBoard[i] == OPEN_SPOT){
-                //VERTICAL
-                if (mBoard[ (i + N) % BOARD_SIZE ] == COMPUTER_PLAYER
-                        && mBoard[ (i + 2 * N) % BOARD_SIZE ] == COMPUTER_PLAYER) return i;
-
-                    //HORIZONTAL
-                else if (mBoard[((i + 1) % N)+ i - (i % N)] == COMPUTER_PLAYER
-                        && mBoard[((i + 2) % N)+ i - (i % N)] == COMPUTER_PLAYER) return i;
-
-                    //DIAGONAL \
-                else if( (i  == 0 && mBoard[4] == COMPUTER_PLAYER && mBoard[8] == COMPUTER_PLAYER) || (i  == 4 && mBoard[0] == COMPUTER_PLAYER && mBoard[8] == COMPUTER_PLAYER) || (i  == 8 && mBoard[4] == COMPUTER_PLAYER && mBoard[0] == COMPUTER_PLAYER)) return i;
-
-                    //DIAGONAL /
-                else if( (i  == 2 && mBoard[4] == COMPUTER_PLAYER && mBoard[6] == COMPUTER_PLAYER) || (i  == 4 && mBoard[2] == COMPUTER_PLAYER && mBoard[6] == COMPUTER_PLAYER) || (i  == 6 && mBoard[4] == COMPUTER_PLAYER && mBoard[2] == COMPUTER_PLAYER)) return i;
+                mBoard[i] = COMPUTER_PLAYER;
+                if(checkForWinner() == 3){
+                    mBoard[i] = OPEN_SPOT;
+                    return i;
+                }else{
+                    mBoard[i] = OPEN_SPOT;
+                }
             }
         }
 
         // See if there's a move O can make to block X from winning
         for (int i = 0; i < BOARD_SIZE; i++) {
-
-            //VERTICAL
             if (mBoard[i] == OPEN_SPOT) {
-                if (mBoard[(i + N) % BOARD_SIZE] == HUMAN_PLAYER && mBoard[(i + 2 * N) % BOARD_SIZE] == HUMAN_PLAYER) return i;
-
-                //HORIZONTAL
-                else if (mBoard[((i + 1) % N) + i - (i % N)] == HUMAN_PLAYER && mBoard[((i + 2) % N) + i - (i % N)] == HUMAN_PLAYER) return i;
-
-                //DIAGONAL \
-                else if ((i == 0 && mBoard[4] == HUMAN_PLAYER && mBoard[8] == HUMAN_PLAYER) || (i == 4 && mBoard[0] == HUMAN_PLAYER && mBoard[8] == HUMAN_PLAYER) || (i == 8 && mBoard[4] == HUMAN_PLAYER && mBoard[0] == HUMAN_PLAYER))
+                mBoard[i] = HUMAN_PLAYER;
+                if(checkForWinner() == 2){
+                    mBoard[i] = OPEN_SPOT;
                     return i;
-                //DIAGONAL /
-                else if ((i == 2 && mBoard[4] == HUMAN_PLAYER && mBoard[6] == HUMAN_PLAYER) || (i == 4 && mBoard[2] == HUMAN_PLAYER && mBoard[6] == HUMAN_PLAYER) || (i == 6 && mBoard[4] == HUMAN_PLAYER && mBoard[2] == HUMAN_PLAYER))
-                    return i;
+                }else{
+                    mBoard[i] = OPEN_SPOT;
+                }
             }
         }
 
